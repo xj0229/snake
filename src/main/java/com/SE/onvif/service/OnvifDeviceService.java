@@ -25,15 +25,6 @@ import com.SE.onvif.persistence.IpcBean;
 import com.SE.onvif.soap.OnvifDevice;
 import com.SE.onvif.util.ServiceFactory;
 
-
-/**
- * @author zhangjp
- *
- */
-/**
- * @author Administrator
- *
- */
 public class OnvifDeviceService {
 	
 	public List<String> getDevInfo(String onvifServIPAndPort, String userName, String password) {

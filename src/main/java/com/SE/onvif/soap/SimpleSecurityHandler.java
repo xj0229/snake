@@ -1,18 +1,18 @@
 package com.SE.onvif.soap;
 
-import static org.apache.wss4j.common.WSS4JConstants.BASE64_ENCODING;
-import static org.apache.wss4j.common.WSS4JConstants.CREATED_LN;
-import static org.apache.wss4j.common.WSS4JConstants.NONCE_LN;
-import static org.apache.wss4j.common.WSS4JConstants.PASSWORD_DIGEST;
-import static org.apache.wss4j.common.WSS4JConstants.PASSWORD_LN;
-import static org.apache.wss4j.common.WSS4JConstants.PASSWORD_TYPE_ATTR;
-import static org.apache.wss4j.common.WSS4JConstants.USERNAME_LN;
-import static org.apache.wss4j.common.WSS4JConstants.USERNAME_TOKEN_LN;
-import static org.apache.wss4j.common.WSS4JConstants.WSSE_LN;
-import static org.apache.wss4j.common.WSS4JConstants.WSSE_NS;
-import static org.apache.wss4j.common.WSS4JConstants.WSSE_PREFIX;
-import static org.apache.wss4j.common.WSS4JConstants.WSU_NS;
-import static org.apache.wss4j.common.WSS4JConstants.WSU_PREFIX;
+import static com.SE.onvif.util.StaticHelper.BASE64_ENCODING;
+import static com.SE.onvif.util.StaticHelper.CREATED_LN;
+import static com.SE.onvif.util.StaticHelper.NONCE_LN;
+import static com.SE.onvif.util.StaticHelper.PASSWORD_DIGEST;
+import static com.SE.onvif.util.StaticHelper.PASSWORD_LN;
+import static com.SE.onvif.util.StaticHelper.PASSWORD_TYPE_ATTR;
+import static com.SE.onvif.util.StaticHelper.USERNAME_LN;
+import static com.SE.onvif.util.StaticHelper.USERNAME_TOKEN_LN;
+import static com.SE.onvif.util.StaticHelper.WSSE_LN;
+import static com.SE.onvif.util.StaticHelper.WSSE_NS;
+import static com.SE.onvif.util.StaticHelper.WSSE_PREFIX;
+import static com.SE.onvif.util.StaticHelper.WSU_NS;
+import static com.SE.onvif.util.StaticHelper.WSU_PREFIX;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
