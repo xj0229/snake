@@ -1,16 +1,30 @@
 package com.SE.onvif.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.InetAddress;
+import java.net.MulticastSocket;
+
 import javax.xml.namespace.QName;
 
 import com.SE.onvif.api.core.DBService;
 import com.SE.onvif.beans.IpcBeanImpl;
 import com.SE.onvif.persistence.IpcBean;
 import com.SE.onvif.util.ServiceFactory;
+import com.SE.onvif.util.StaticHelper;
 import com.ms.wsdiscovery.WsDiscoveryFinder;
 import com.ms.wsdiscovery.exception.WsDiscoveryException;
 import com.ms.wsdiscovery.network.exception.WsDiscoveryNetworkException;
 import com.ms.wsdiscovery.servicedirectory.WsDiscoveryService;
 import com.ms.wsdiscovery.servicedirectory.interfaces.IWsDiscoveryServiceCollection;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 public class OnvifDevFinderService {
 	WsDiscoveryFinder finder;
@@ -93,5 +107,29 @@ public class OnvifDevFinderService {
 
 		// Stop finder 
 		finder.done();
+	}
+	
+	public static void main(String[] args) throws IOException{
+		File probe = new File(StaticHelper.probeFile);
+		BufferedReader reader = new BufferedReader(new FileReader(probe));
+		StringBuilder sb = new StringBuilder();
+		String tem = null;
+		while((tem = reader.readLine()) != null){
+			sb.append(tem);
+		}
+		
+		String probeProtocol = sb.toString();
+		
+		InetAddress address = InetAddress.getByName("239.255.255.250");
+		MulticastSocket ms = new MulticastSocket(3702);
+		ms.setTimeToLive(32);
+		byte[] data =probeProtocol.getBytes();
+		ms.joinGroup(address);
+		ms.setLoopbackMode(false);
+		DatagramPacket dp = new DatagramPacket(data,data.length,address,3702);
+		ms.send(dp);
+		ms.close();
+		
+		//System.out.println(sb.toString());
 	}
 }
