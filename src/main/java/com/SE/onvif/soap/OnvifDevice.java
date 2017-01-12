@@ -41,6 +41,13 @@ import com.SE.onvif.util.WSDLLocations;
 //notice this class
 public class OnvifDevice {
 	private static final Logger logger = LoggerFactory.getLogger(OnvifDevice.class);
+	
+	
+	private String IpNoPort;
+	public String getIpNoPort(){
+		return IpNoPort;
+	}
+	
 
 	private String deviceIp, originalIp;
 	private boolean isProxy;
@@ -71,6 +78,11 @@ public class OnvifDevice {
 	 * @throws SOAPException
 	 */
 	public OnvifDevice(String deviceIp, String user, String password) throws ConnectException, SOAPException {
+		
+		String[] tem = deviceIp.split(":");
+		
+		this.IpNoPort = tem[0];
+		
 		this.deviceIp = deviceIp;
 		URL wsdlLocation = this.getClass().getResource(WSDLLocations.DEVICE);
 		this.device = new DeviceService(wsdlLocation).getDevicePort();
@@ -180,12 +192,12 @@ public class OnvifDevice {
 			configService((BindingProvider) imaging, imagingUri);
 		}
 
-		if (capabilities.getEvents() != null && capabilities.getEvents().getXAddr() != null) {
+/*		if (capabilities.getEvents() != null && capabilities.getEvents().getXAddr() != null) {
 			URL wsdlLocation = this.getClass().getResource(WSDLLocations.EVENT);
 			events = new EventService(wsdlLocation).getEventPort();
 			String eventsUri = replaceLocalIpWithProxyIp(capabilities.getEvents().getXAddr());
 			configService((BindingProvider) events, eventsUri);
-		}
+		}*/
 		
 		if (capabilities.getExtension().getReceiver() != null && capabilities.getExtension().getReceiver().getXAddr() != null) {
 			URL wsdlLocation = this.getClass().getResource(WSDLLocations.RECEIVER);
